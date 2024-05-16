@@ -17,6 +17,7 @@ import { State } from "./State";
 @Index("uq_service_code", ["code"], { unique: true })
 @Entity("service", { schema: "tf_psep_2024" })
 export class Service {
+  [x: string]: any;
   @PrimaryGeneratedColumn({ type: "int", name: "service_id", unsigned: true })
   serviceId: number;
 
@@ -47,12 +48,12 @@ export class Service {
   @Column("datetime", { name: "deleted_at", nullable: true })
   deletedAt: Date | null;
 
-  @ManyToOne(() => User, (user) => user.services, {
+  @ManyToOne(() => User, (user) => user.createdServices, {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   })
   @JoinColumn([{ name: "created_by", referencedColumnName: "userId" }])
-  createdBy2: User;
+  createdByUser: User;
 
   @ManyToOne(() => Device, (device) => device.services, {
     onDelete: "CASCADE",
@@ -68,10 +69,10 @@ export class Service {
   @JoinColumn([{ name: "state_id", referencedColumnName: "stateId" }])
   state: State;
 
-  @ManyToOne(() => User, (user) => user.services2, {
+  @ManyToOne(() => User, (user) => user.createdServices, {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   })
   @JoinColumn([{ name: "updated_by", referencedColumnName: "userId" }])
-  updatedBy2: User;
+  updatedByUser: User;
 }
