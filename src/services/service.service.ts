@@ -76,8 +76,13 @@ export class ServiceService {
 
                             name: true
                         }
+                    },
+                    customer:{
+                        name:true,
+                        taxId : true
                     }
                 },
+               
                 state: {
 
                     name: true
@@ -125,6 +130,9 @@ export class ServiceService {
                         type: true
                     },
                     customer : true
+
+
+                    
                 }
             }
         })

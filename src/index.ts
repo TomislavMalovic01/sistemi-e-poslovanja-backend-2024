@@ -4,6 +4,16 @@ import morgan from 'morgan'
 import { configDotenv } from 'dotenv'
 import { AppDataSource } from './db'
 import { ServiceService } from './services/service.service'
+import { TypeRoute } from './routes/type.route'
+import { State } from './entities/State'
+import { StateRoute } from './routes/state.route'
+import { Service } from './entities/Service'
+import { ServiceRoute } from './routes/service.route'
+import { Model } from './entities/Model'
+import { ModelRoute} from './routes/model.route'
+import { ManufacturerRoute } from './routes/manufacturer.route'
+import { DeviceRoute } from './routes/device.route'
+import { CustomerRoute } from './routes/customer.route'
 
 
 
@@ -22,6 +32,13 @@ AppDataSource.initialize().then(() => {
     })
 
 }).catch((e) => console.log(e));
+app.use('/api/customer', CustomerRoute)
+app.use('/api/device', DeviceRoute)
+app.use('/api/manufacturer', ManufacturerRoute)
+app.use('/api/state', StateRoute)
+app.use('/api/type', TypeRoute)
+app.use('/api/service', ServiceRoute)
+app.use('/api/model', ModelRoute)
 
 
 app.get('/', async (req, res) => {
